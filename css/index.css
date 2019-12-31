@@ -1,8 +1,19 @@
+@keyframes start-anim {
+  0% {
+    transform: translate(-100%, 100%) rotate(calc(360deg * -1.5));
+  }
+
+  100% {
+    transform: translate(0, 0) rotate(0);
+  }
+}
+
 html {
   font-size: 14px;
 }
 
 body {
+  overflow: hidden;
   background: url(../imgs/tablewood.jpg) center top;
   background-size: auto calc(260px / 2);
   font-family: 'Ma Shan Zheng', cursive;
@@ -20,6 +31,8 @@ body {
   height: 30vw;
   transform-style: preserve-3d;
   transition: 0.45s;
+  cursor: pointer;
+  animation: start-anim 2s;
 }
 
 .page,
@@ -107,6 +120,7 @@ body {
   position: relative;
   padding-top: 1em;
   padding-left: 6em;
+  transition: opacity 0.34s;
 }
 
 .member:nth-child(n + 2) {
@@ -138,14 +152,44 @@ body {
   position: absolute;
   top: 1em;
   right: 0;
-  display: none;
+  opacity: 0;
+  visibility: hidden;
 }
 
-.is-closed .member__btn {
-  display: block;
+.is-zoomIn .member {
+  opacity: 0;
 }
+
+.is-zoomIn .is-selected.member {
+  opacity: 1;
+}
+
+.is-selected .member__btn {
+  opacity: 1;
+  visibility: visible;
+}
+
 .page__close {
   position: absolute;
   top: -24px;
   right: 0;
+}
+
+.hand {
+  outline: 1px dashed;
+  position: absolute;
+  top: 70%;
+  left: 70%;
+  width: calc(600px / 2);
+  height: calc(768px / 2);
+}
+
+.hand img {
+  max-width: 100%;
+  transform-origin: 50px top;
+  transition: transform 0.45s;
+}
+
+.is-zoomIn .hand img {
+  transform: scale(2);
 }
